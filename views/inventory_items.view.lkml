@@ -80,3 +80,4 @@ view: inventory_items {
 }
 
 ###comentario1
+#comentario2
