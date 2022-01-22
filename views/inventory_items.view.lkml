@@ -82,5 +82,5 @@ view: inventory_items {
 ###comentario1
 #comentario2
 #comentario3
-#comemtariodirectoamaster
+#comemtariodirectoamasterrr 
 #cambio en la ramaremotaaa
