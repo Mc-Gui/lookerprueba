@@ -78,3 +78,5 @@ view: inventory_items {
     drill_fields: [id, products.id, products.item_name, order_items.count]
   }
 }
+
+###comentario1
