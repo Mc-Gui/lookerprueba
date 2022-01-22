@@ -79,6 +79,8 @@ view: inventory_items {
   }
 }
 
+#ccccccc
+
 ###comentario1
 #comentario2
 #comentario3
