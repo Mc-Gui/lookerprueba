@@ -89,3 +89,5 @@ view: inventory_items {
 #XXXXXXXXX
 #rrrrrr
 #-------
+#-------XXXX
+#ttttt
