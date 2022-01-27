@@ -4,8 +4,11 @@ view: products {
   # to be used for all fields in this view.
   sql_table_name: public.products ;;
   drill_fields: [id]
-  # This primary key is the unique key for this table in the underlying database.
-  # You need to define a primary key in a view in order to join to other views.
+
+filter: filtroX {
+  type: string
+  suggestions: ["adidas"]
+}
 
   dimension: id {
     primary_key: yes
@@ -13,14 +16,34 @@ view: products {
     sql: ${TABLE}.id ;;
   }
 
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Brand" in Explore.
-
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
+
+    link:{
+    url: "http://www.google.com/search?q={{ value }}"
+    icon_url: "http://google.com/favicon.ico"
+        }
+
+    #poner imagen en lugar del valor del campo
+   # html: <img src="http://www.brettcase.com/product_images/{{ value }}.jpg" /> ;;
+
+    #
+    #html: <a href="{{ website.url._value }}" target="_new">{{ value }}</a> ;;
+    }
+
+  dimension: templatedfilter {
+    #sql: {% condition filtroX %} ${brand} {% endcondition %} ;;#regresa un true o flase
+    case: {
+      when: {
+        sql: {% condition filtroX %} ${brand} {% endcondition %} ;;
+        label: "se cumplio el case"
+      }
+      # possibly more when statements
+      else: "no se cumplio el case"
+    }
   }
+
 
   dimension: category {
     type: string
@@ -71,3 +94,8 @@ view: products {
     drill_fields: [id, item_name, inventory_items.count, product_facts.count]
   }
 }
+
+#usar campos de otras vistas
+#{{ view_name.field_name._value }}
+#{{ view_name.field_name._rendered_value }}
+#{{ view_name.field_name._model._name }}

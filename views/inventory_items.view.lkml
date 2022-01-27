@@ -4,8 +4,42 @@ view: inventory_items {
   # to be used for all fields in this view.
   sql_table_name: public.inventory_items ;;
   drill_fields: [id]
-  # This primary key is the unique key for this table in the underlying database.
-  # You need to define a primary key in a view in order to join to other views.
+
+
+  filter: filtrodefecha {
+    type: date
+  }
+
+  dimension: basadaenfiltrodefecha{
+
+    #sql: {% if filtrodefecha==null%}'yes'{% else %} 'no'{%endif%} ;;
+    #sql: {% date_end filtrodefecha %}   ;;
+  }
+
+
+  dimension: liquidObject {
+    type: string
+    link: {
+      url: " https://help.looker.com/hc/en-us/articles/360023722974-A-Simple-Explanation-of-Symmetric-Aggregates-or-Why-On-Earth-Does-My-SQL-Look-Like-That-"
+    }
+
+    #sql: '{{ link}}' ;;<------no supe
+    #sql: '{{_model._name}}' ;;  #----> imprime el nombre del proyecto
+    #sql:'{{_field._name}}'  ;;
+    #sql: '{{_query._query_timezone}}' ;;
+    #sql:'{{inventory_items._in_query}}'---->este no jalo tal cual por que noes una dimension tipica/mal definida
+    #sql: {% if 'order_items'.parametrofec._parameter_value==null%}'yes'{%endif%} ;;
+  }
+
+  dimension: liquidTag {
+    # sql:{%if _model._name!="hol"%} 'diferente' {% endif %};;
+    #sql: {%if products._in_query!= true%} 'notrue'{% endif %};;
+    #sql: {%date_start order_items.fecha %};;#--->si se le pone' imprime como cadena :/ ppp lo dice la documentacion
+    #sql: {%date_start created_date %};;---->este no jalo
+
+  }
+
+
 
   dimension: id {
     primary_key: yes
@@ -13,18 +47,12 @@ view: inventory_items {
     sql: ${TABLE}.id ;;
   }
 
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Cost" in Explore.
+
 
   dimension: cost {
     type: number
     sql: ${TABLE}.cost ;;
   }
-
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
   measure: total_cost {
     type: sum
@@ -35,9 +63,6 @@ view: inventory_items {
     type: average
     sql: ${cost} ;;
   }
-
-  # Dates and timestamps can be represented in Looker using a dimension group of type: time.
-  # Looker converts dates and timestamps to the specified timeframes within the dimension group.
 
   dimension_group: created {
     type: time
@@ -77,23 +102,6 @@ view: inventory_items {
     type: count
     drill_fields: [id, products.id, products.item_name, order_items.count]
   }
+
+
 }
-#bbbbbbbb
-
-#ccccccc
-
-###comentario1
-#comentario2
-#comentario3
-#comemtariodirectoamasterrr
-#cambio en la ramaremotaaa
-#editopasterylooker2
-#editomasterylooker
-#XXXXXXXXX
-#rrrrrr
-#-------
-#-------XXXX
-#ttttt
-#yyyyy
-#wwwwww
-#aaaaaaaa
