@@ -21,8 +21,8 @@ filter: filtroX {
     sql: ${TABLE}.brand ;;
 
     link:{
-    url: "http://www.google.com/search?q={{ value }}"
-    icon_url: "http://google.com/favicon.ico"
+    url: "http://www.google.com/search?q={{value}}"
+    icon_url: "https://www.google.com/s2/favicons?domain=www.nps.gov"
         }
 
     #poner imagen en lugar del valor del campo
