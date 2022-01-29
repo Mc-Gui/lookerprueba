@@ -16,12 +16,15 @@ filter: filtroX {
     sql: ${TABLE}.id ;;
   }
 
+
+
+
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
 
     link:{
-    url: "http://www.google.com/search?q={{value}}"
+    url: "http://www.google.com/search?q={{ value }}"
     icon_url: "https://www.google.com/s2/favicons?domain=www.nps.gov"
         }
 
@@ -31,6 +34,8 @@ filter: filtroX {
     #
     #html: <a href="{{ website.url._value }}" target="_new">{{ value }}</a> ;;
     }
+
+
 
   dimension: templatedfilter {
     #sql: {% condition filtroX %} ${brand} {% endcondition %} ;;#regresa un true o flase

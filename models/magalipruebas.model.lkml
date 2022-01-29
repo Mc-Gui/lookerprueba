@@ -1,9 +1,7 @@
 # Define the database connection to be used for this model.
 connection: "thelook"
-
 # include all the views
 include: "/views/**/*.view"
-include: "/**/*.dashboard"
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
